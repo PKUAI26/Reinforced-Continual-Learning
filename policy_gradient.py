@@ -25,7 +25,6 @@ class PolicyEstimator(nn.Module):
         self.input_size = args.state_space
         self.state_space = args.state_space
         self.hidden_size = args.hidden_size
-        self.batch_size = args.batch_size
         self.num_layers = args.num_layers
         self.actions_num = args.actions_num
         self.lstm = nn.LSTM(self.input_size, self.hidden_size, self.
@@ -37,12 +36,6 @@ class PolicyEstimator(nn.Module):
         self.hidden2output = nn.Linear(self.hidden_size, self.state_space)
         init.uniform(self.hidden2output.weight.data, -0.08, 0.08)     # weights to output from U[-0.08, 0.08]  
         init.uniform(self.hidden2output.bias.data, -0.08, 0.08)       # bias to output from U[-0.08, 0.08]
-        self.hidden = self.init_hidden()
-
-    def init_hidden(self):
-        hidden = (Variable(torch.zeros(self.num_layers, self.batch_size,  self.hidden_size)),  # hidden = 0
-                Variable(torch.zeros(self.num_layers, self.batch_size, self.hidden_size)))         # tried with randN also, didn't work
-        return hidden
 
     def forward(self,x):
         self.policy_actions = []

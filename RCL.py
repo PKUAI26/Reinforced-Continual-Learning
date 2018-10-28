@@ -119,6 +119,7 @@ class RCL:
                         best_reward = reward
                         self.best_params[task_id] = (accuracy_test, self.evaluates.var_list)
                     controller.train_controller(reward)
+                controller.close_session()
                 self.result_process.append(results)
                 self.vars = self.best_params[task_id][1]
         

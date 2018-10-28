@@ -67,7 +67,7 @@ class evaluate:
             l = len(self.task_list[0][1])
             for epoch in range(self.epochs):
                 flag=0
-                for _ in range(l//self.batch_size):
+                for _ in range(l//self.batch_size+1):
                     batch_xs, batch_ys = (self.task_list[task_id][0][flag:flag+self.batch_size],
                                           self.task_list[task_id][1][flag:flag+self.batch_size])
                     flag+=self.batch_size
